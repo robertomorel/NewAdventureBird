@@ -41,4 +41,14 @@ public class SaveManager : MonoBehaviour
             Debug.Log("Nenhum arquivo encontrado, criando um novo.");
         }
     }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
+    }
+
+    private void OnApplicationPause(bool pause)
+    {
+        PlayerPrefs.Save();
+    }
 }

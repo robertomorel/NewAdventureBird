@@ -69,8 +69,11 @@ public class PlayerController : MonoBehaviour
         bool buttonJump;
         /*
 #if UNITY_ANDROID
-        inputVertical = CrossPlatformInputManager.GetAxis("Vertical");
-        inputHorizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+        //inputVertical = CrossPlatformInputManager.GetAxis("Vertical");
+        //inputHorizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+        //buttonJump = CrossPlatformInputManager.GetButton("Jump");
+        inputVertical = MSJoystickController.joystickInput.y;
+        inputHorizontal = MSJoystickController.joystickInput.x;
         buttonJump = CrossPlatformInputManager.GetButton("Jump");
 #elif UNITY_IOS
         Debug.log("It´s running in IOS platform");
@@ -80,9 +83,9 @@ public class PlayerController : MonoBehaviour
         buttonJump = Input.GetButton("Jump");
 #endif
 */
-        inputVertical = MSJoystickController.joystickInput.y;
-        inputHorizontal = MSJoystickController.joystickInput.x;
-        buttonJump = CrossPlatformInputManager.GetButton("Jump");
+        inputVertical = Input.GetAxis("Vertical");
+        inputHorizontal = Input.GetAxis("Horizontal");
+        buttonJump = Input.GetButton("Jump");
 
         // -- Armazena o transform da câmera
         Transform _transformCamera = Camera.main.transform;
@@ -147,10 +150,7 @@ public class PlayerController : MonoBehaviour
             // Se a animação "JUMP" não estiver mais rodando...
             if (!playerAnimation.IsPlaying("JUMP"))
             {
-                // -- O método Blend cria uma transição entre animações
-                //playerAnimation.Play("WALK");
                 // -- Ativa a animação "WALK"
-                //playerAnimation.Blend("WALK", 0.05f);
                 playerAnimation.Play("WALK");
             }
         }
@@ -159,11 +159,8 @@ public class PlayerController : MonoBehaviour
             // -- Se player está no chão...
             if (_characterController.isGrounded)
             {
-                // -- O método Blend cria uma transição entre animações
-                //playerAnimation.Play("IDLE");
                 // -- Ativa a animação "IDLE"
                 playerAnimation.Play("IDLE");
-                //playerAnimation.Blend("IDLE", 0.05f);
             }
         }
     }
