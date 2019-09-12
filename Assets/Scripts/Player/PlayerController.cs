@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region privates_fields_serializebles
-    [SerializeField] private float _speed = 4.0f;                   // Valor fechado para a velocidade do player
+    [SerializeField] private float _speed = 3.0f;                   // Valor fechado para a velocidade do player
     [SerializeField] private float _spin = 60.0f;                   // Valor para o giro do player
     [SerializeField] private float _gravity = 3.5f;                 // Valor fechado para a gravidade aplicada
     [SerializeField] private float _jump = 5.0f;                    // Valor fechado para o pulo do player
@@ -57,24 +57,21 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.gameIsOn || GameManager.gameOver || GameManager.gameWin)
         {
             // -- Se player está no chão...
-            if (_characterController.isGrounded)
-            {
-                // -- Ativa a animação "IDLE"
-                playerAnimation.Play("IDLE");
-            }
+            //if (_characterController.isGrounded)
+            //{
+            // -- Ativa a animação "IDLE"
+            playerAnimation.Play("IDLE");
+            //}
             return;
         }
 
         float inputVertical, inputHorizontal;
         bool buttonJump;
-        /*
+
 #if UNITY_ANDROID
-        //inputVertical = CrossPlatformInputManager.GetAxis("Vertical");
-        //inputHorizontal = CrossPlatformInputManager.GetAxis("Horizontal");
-        //buttonJump = CrossPlatformInputManager.GetButton("Jump");
         inputVertical = MSJoystickController.joystickInput.y;
         inputHorizontal = MSJoystickController.joystickInput.x;
-        buttonJump = CrossPlatformInputManager.GetButton("Jump");
+        buttonJump = CrossPlatformInputManager.GetButtonDown("Jump");
 #elif UNITY_IOS
         Debug.log("It´s running in IOS platform");
 #else
@@ -82,10 +79,17 @@ public class PlayerController : MonoBehaviour
         inputHorizontal = Input.GetAxis("Horizontal");
         buttonJump = Input.GetButton("Jump");
 #endif
-*/
-        inputVertical = Input.GetAxis("Vertical");
-        inputHorizontal = Input.GetAxis("Horizontal");
-        buttonJump = Input.GetButton("Jump");
+
+        //inputVertical = Input.GetAxis("Vertical");
+        //inputHorizontal = Input.GetAxis("Horizontal");
+        //buttonJump = CrossPlatformInputManager.GetButtonDown("Jump");//Input.GetButtonDown("Fire1");
+
+        /*
+        if (Input.mousePosition.x <= Screen.width / 2)
+        {
+            buttonJump = false;
+        }
+        */
 
         // -- Armazena o transform da câmera
         Transform _transformCamera = Camera.main.transform;

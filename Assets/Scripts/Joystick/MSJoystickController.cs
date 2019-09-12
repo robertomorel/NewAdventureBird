@@ -6,7 +6,8 @@ public class MSJoystickController : MonoBehaviour
 {
 
     public MSJoystick joystick;
-    public static Vector2 joystickInput;//é possível acessar através de MSJoystickController.joystickInput
+    public static Vector2 joystickInput;     //é possível acessar através de MSJoystickController.joystickInput
+    public static bool jumpInput;
 
     void Update()
     {
@@ -15,4 +16,5 @@ public class MSJoystickController : MonoBehaviour
             joystickInput = new Vector2(joystick.joystickX, joystick.joystickY);
         }
     }
+
 }
